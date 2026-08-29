@@ -77,7 +77,7 @@ class Race:
                     print(
                         f"P{driver.position} - "
                         f"{driver.name} | +{driver.gap:.2f}s"
-                        f"{driver.gap:.2f}s | Pits: {driver.pit_stops}"
+                        f" | Pits: {driver.pit_stops}"
                     )
 
             print("\n=== DNF ===")
