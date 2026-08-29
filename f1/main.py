@@ -1,5 +1,6 @@
 from copy import deepcopy
 
+from f1.circuit import Circuit
 from f1.driver import AggressiveDriver, BalancedDriver, ConservativeDriver
 from f1.race import Race
 from f1.team import Team
@@ -75,7 +76,8 @@ def create_drivers():
 
 
 def main():
-    race = Race(create_drivers(), total_laps=30)
+    circuit = Circuit("Simulation Grand Prix", total_laps=30)
+    race = Race(create_drivers(), circuit)
     race.run()
 
 

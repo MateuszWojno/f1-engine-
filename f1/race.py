@@ -2,9 +2,10 @@ from f1.logger import RaceLogger
 
 
 class Race:
-    def __init__(self, drivers, total_laps, logger=None):
+    def __init__(self, drivers, circuit, logger=None):
         self.drivers = drivers
-        self.total_laps = total_laps
+        self.circuit = circuit
+        self.total_laps = circuit.total_laps
         self.current_lap = 0
         self.finished = False
         self.logger = logger or RaceLogger()
@@ -70,7 +71,10 @@ class Race:
             self.step()
 
             print("================================")
-            print(f"Lap {self.current_lap}/{self.total_laps}")
+            print(
+                f"{self.circuit.name} | "
+                f"Lap {self.current_lap}/{self.total_laps}"
+            )
 
             active_drivers = sorted(
                 (driver for driver in self.drivers if driver.in_race),
