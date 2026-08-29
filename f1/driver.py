@@ -100,7 +100,7 @@ class AggressiveDriver(Driver):
             random.uniform(-1, 1)
         )
 
-        self.lap_time = 120 - self.performance * 0.1
+        self.lap_time = 113 - self.performance * 0.03
 
         # DNF
         if self.fuel <= 0 or self.tyre_fresh <= 0:
@@ -135,7 +135,7 @@ class ConservativeDriver(Driver):
                 random.uniform(-1, 1)
         )
 
-        self.lap_time = 120 - self.performance * 0.1
+        self.lap_time = 113 - self.performance * 0.03
 
         if self.fuel <= 0 or self.tyre_fresh <= 0:
             self.in_race = False
@@ -169,7 +169,7 @@ class BalancedDriver(Driver):
                 random.uniform(-1, 1)
         )
 
-        self.lap_time = 120 - self.performance * 0.1
+        self.lap_time = 113 - self.performance * 0.03
 
         if self.fuel <= 0 or self.tyre_fresh <= 0:
             self.in_race = False
