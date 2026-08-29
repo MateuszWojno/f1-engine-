@@ -72,10 +72,12 @@ class Race:
             print("================================")
             print(f"Lap {self.current_lap}/{self.total_laps}")
 
-            for driver in self.drivers:
-                if not driver.in_race:
-                    continue
+            active_drivers = sorted(
+                (driver for driver in self.drivers if driver.in_race),
+                key=lambda driver: driver.position,
+            )
 
+            for driver in active_drivers:
                 if driver.position == 1:
                     print(f"P1 - {driver.name} | Leader")
                 else:
