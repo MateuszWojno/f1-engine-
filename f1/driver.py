@@ -60,7 +60,8 @@ class Driver (ABC):
         self.pit_stops += 1
 
         # strata czasu na alei serwisowej
-        self.total_time += 25
+        pit_speed = self.team.pit_speed if self.team else 0
+        self.total_time += max(20, 25 - pit_speed)
 
         # nowe opony
         self.tyre_fresh = 100
