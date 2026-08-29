@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from f1.circuit import Circuit
+from f1.calendar_2026 import F1_2026_CALENDAR
 from f1.driver import AggressiveDriver, BalancedDriver, ConservativeDriver
 from f1.race import Race
 from f1.team import Team
@@ -76,7 +76,7 @@ def create_drivers():
 
 
 def main():
-    circuit = Circuit("Simulation Grand Prix", total_laps=30, base_lap_time=113)
+    circuit = F1_2026_CALENDAR[10]
     race = Race(create_drivers(), circuit)
     race.run()
 
