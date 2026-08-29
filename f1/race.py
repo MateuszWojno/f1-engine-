@@ -2,12 +2,12 @@ from f1.logger import RaceLogger
 
 
 class Race:
-    def __init__(self, drivers, total_laps, logger = RaceLogger()):
+    def __init__(self, drivers, total_laps, logger=None):
         self.drivers = drivers
         self.total_laps = total_laps
         self.current_lap = 0
         self.finished = False
-        self.logger = logger
+        self.logger = logger or RaceLogger()
 
     def step(self):
         if self.finished:
