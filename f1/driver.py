@@ -131,6 +131,8 @@ class ConservativeDriver(Driver):
                 random.uniform(-1, 1)
         )
 
+        self.lap_time = 120 - self.performance * 0.1
+
         if self.fuel <= 0 or self.tyre_fresh <= 0:
             self.in_race = False
             self.performance -= 1000
@@ -158,6 +160,8 @@ class BalancedDriver(Driver):
                 tyre_loss * 0.4 +
                 random.uniform(-1, 1)
         )
+
+        self.lap_time = 120 - self.performance * 0.1
 
         if self.fuel <= 0 or self.tyre_fresh <= 0:
             self.in_race = False
