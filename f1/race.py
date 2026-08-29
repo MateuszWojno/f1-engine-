@@ -13,10 +13,8 @@ class Race:
         if self.finished:
             return
 
-        # 1. nowy tick
         self.current_lap += 1
 
-        # 2. każdy driver aktualizuje stan (paliwo, opony, performance)
         for driver in self.drivers:
             if driver.in_race:
                 driver.act()
@@ -31,32 +29,36 @@ class Race:
 
         ranking = sorted(active, key=lambda d: d.total_time)
 
-        leader_time = ranking[0].total_time
-
-        for driver in ranking:
-            driver.gap = driver.total_time - leader_time
-
-        # 4. wyprzedzanie (od tyłu, stabilnie)
         i = len(ranking) - 1
         while i > 0:
             attacker = ranking[i]
             defender = ranking[i - 1]
 
-            # interakcja (czy wyprzedzenie się uda)
             if attacker.interact(defender):
+                attacker.total_time = defender.total_time - 0.001
                 ranking[i], ranking[i - 1] = ranking[i - 1], ranking[i]
-                i -= 1  # cofamy się po swapie
+                i -= 1  
             else:
                 i -= 1
 
-        # 5. aktualizacja pozycji
+        ranking = sorted(
+            (driver for driver in ranking if driver.in_race),
+            key=lambda driver: driver.total_time,
+        )
+
+        if not ranking:
+            self.finished = True
+            self.logger.save_lap(self.current_lap, self.drivers)
+            return
+
+        leader_time = ranking[0].total_time
+
         for p, driver in enumerate(ranking, start=1):
             driver.position = p
+            driver.gap = driver.total_time - leader_time
 
-        # 6. zapis nowej kolejności jako “stan świata”
 
 
-        # 7. zakończenie wyścigu
         if self.current_lap >= self.total_laps:
             self.finished = True
 
