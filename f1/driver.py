@@ -121,6 +121,9 @@ class ConservativeDriver(Driver):
         self.fuel = max(self.fuel, 0)
         self.tyre_fresh = max(self.tyre_fresh, 0)
 
+        if self.tyre_fresh <= 20:
+            self.pit_stop()
+
         fuel_loss = 100 - self.fuel
         tyre_loss = 100 - self.tyre_fresh
 
@@ -151,6 +154,9 @@ class BalancedDriver(Driver):
 
         self.fuel = max(self.fuel, 0)
         self.tyre_fresh = max(self.tyre_fresh, 0)
+
+        if self.tyre_fresh <= 25:
+            self.pit_stop()
 
         fuel_loss = 100 - self.fuel
         tyre_loss = 100 - self.tyre_fresh
