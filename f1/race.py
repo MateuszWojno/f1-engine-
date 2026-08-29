@@ -71,6 +71,9 @@ class Race:
             print(f"Lap {self.current_lap}/{self.total_laps}")
 
             for driver in self.drivers:
+                if not driver.in_race:
+                    continue
+
                 if driver.position == 1:
                     print(f"P1 - {driver.name} | Leader")
                 else:
