@@ -24,6 +24,11 @@ class Race:
 
         active = [d for d in self.drivers if d.in_race]
 
+        if not active:
+            self.finished = True
+            self.logger.save_lap(self.current_lap, self.drivers)
+            return
+
         ranking = sorted(active, key=lambda d: d.total_time)
 
         leader_time = ranking[0].total_time
