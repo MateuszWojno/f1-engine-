@@ -18,7 +18,7 @@ class Race:
 
         for driver in self.drivers:
             if driver.in_race:
-                driver.act()
+                driver.act(self.circuit)
                 driver.total_time += driver.lap_time
 
         active = [d for d in self.drivers if d.in_race]

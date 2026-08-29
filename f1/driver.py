@@ -21,7 +21,7 @@ class Driver (ABC):
         self.team = None
 
     @abstractmethod
-    def act(self):
+    def act(self, circuit):
         pass
 
     def interact(self, other):
@@ -78,7 +78,7 @@ class Driver (ABC):
 
 class AggressiveDriver(Driver):
 
-    def act(self):
+    def act(self, circuit):
 
         if not self.in_race:
             return
@@ -104,7 +104,7 @@ class AggressiveDriver(Driver):
             random.uniform(-1, 1)
         )
 
-        self.lap_time = 113 - self.performance * 0.03
+        self.lap_time = circuit.base_lap_time - self.performance * 0.03
 
         # DNF
         if self.fuel <= 0 or self.tyre_fresh <= 0:
@@ -114,7 +114,7 @@ class AggressiveDriver(Driver):
 
 class ConservativeDriver(Driver):
 
-    def act(self):
+    def act(self, circuit):
 
         if not self.in_race:
             return
@@ -138,7 +138,7 @@ class ConservativeDriver(Driver):
                 random.uniform(-1, 1)
         )
 
-        self.lap_time = 113 - self.performance * 0.03
+        self.lap_time = circuit.base_lap_time - self.performance * 0.03
 
         if self.fuel <= 0 or self.tyre_fresh <= 0:
             self.in_race = False
@@ -147,7 +147,7 @@ class ConservativeDriver(Driver):
 
 class BalancedDriver(Driver):
 
-    def act(self):
+    def act(self, circuit):
 
         if not self.in_race:
             return
@@ -171,7 +171,7 @@ class BalancedDriver(Driver):
                 random.uniform(-1, 1)
         )
 
-        self.lap_time = 113 - self.performance * 0.03
+        self.lap_time = circuit.base_lap_time - self.performance * 0.03
 
         if self.fuel <= 0 or self.tyre_fresh <= 0:
             self.in_race = False

@@ -76,7 +76,7 @@ def create_drivers():
 
 
 def main():
-    circuit = Circuit("Simulation Grand Prix", total_laps=30)
+    circuit = Circuit("Simulation Grand Prix", total_laps=30, base_lap_time=113)
     race = Race(create_drivers(), circuit)
     race.run()
 

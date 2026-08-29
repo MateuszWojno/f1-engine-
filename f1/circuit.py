@@ -5,3 +5,4 @@ from dataclasses import dataclass
 class Circuit:
     name: str
     total_laps: int
+    base_lap_time: float
