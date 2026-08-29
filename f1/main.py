@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from f1.driver import AggressiveDriver, BalancedDriver, ConservativeDriver
 from f1.race import Race
 from f1.team import Team
@@ -21,7 +23,7 @@ def assign_to_team(driver, team):
     return driver
 
 
-drivers = [
+driver_templates = [
     # Mercedes
     assign_to_team(BalancedDriver("Russell", 95, 96, 0, True), mercedes),
     assign_to_team(AggressiveDriver("Antonelli", 97, 94, 0, True), mercedes),
@@ -68,8 +70,12 @@ drivers = [
 ]
 
 
+def create_drivers():
+    return deepcopy(driver_templates)
+
+
 def main():
-    race = Race(drivers, total_laps=30)
+    race = Race(create_drivers(), total_laps=30)
     race.run()
 
 
