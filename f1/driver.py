@@ -94,12 +94,12 @@ class AggressiveDriver(Driver):
             self.pit_stop()
 
         # 🔥 straty
-        fuel_loss = 100 - self.fuel
+        fuel_penalty = self.fuel * 0.02
         tyre_loss = 100 - self.tyre_fresh
 
         self.performance = (
             self.calculate_base_performance() -
-            fuel_loss * 0.2 -
+            fuel_penalty -
             tyre_loss * 0.4 +
             random.uniform(-1, 1)
         )
@@ -128,12 +128,12 @@ class ConservativeDriver(Driver):
         if self.tyre_fresh <= 20:
             self.pit_stop()
 
-        fuel_loss = 100 - self.fuel
+        fuel_penalty = self.fuel * 0.02
         tyre_loss = 100 - self.tyre_fresh
 
         self.performance = (
                 self.calculate_base_performance() -
-                fuel_loss * 0.2 -
+                fuel_penalty -
                 tyre_loss * 0.4 +
                 random.uniform(-1, 1)
         )
@@ -161,12 +161,12 @@ class BalancedDriver(Driver):
         if self.tyre_fresh <= 25:
             self.pit_stop()
 
-        fuel_loss = 100 - self.fuel
+        fuel_penalty = self.fuel * 0.02
         tyre_loss = 100 - self.tyre_fresh
 
         self.performance = (
                 self.calculate_base_performance() -
-                 fuel_loss * 0.2 -
+                 fuel_penalty -
                 tyre_loss * 0.4 +
                 random.uniform(-1, 1)
         )
