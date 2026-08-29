@@ -1,67 +1,72 @@
-from f1.team import Team
-from f1.driver import AggressiveDriver
-from f1.driver import ConservativeDriver
-from f1.driver import BalancedDriver
+from f1.driver import AggressiveDriver, BalancedDriver, ConservativeDriver
 from f1.race import Race
+from f1.team import Team
 
-red_bull = Team("Red Bull", strength=95, pit_speed=2)
-ferrari = Team("Ferrari", strength=92, pit_speed=1)
-mercedes = Team("Mercedes", strength=90, pit_speed=1)
-mclaren = Team("McLaren", strength=93, pit_speed=2)
 
-# Red Bull
-verstappen = AggressiveDriver("Verstappen", speed=97, skill=98, position=0, in_race=True)
-verstappen.team = red_bull
-tsunoda = AggressiveDriver("Tsunoda", speed=85, skill=84, position=0, in_race=True)
+mercedes = Team("Mercedes", strength=97, pit_speed=3)
+ferrari = Team("Ferrari", strength=94, pit_speed=3)
+mclaren = Team("McLaren", strength=92, pit_speed=3)
+red_bull = Team("Red Bull Racing", strength=89, pit_speed=3)
+racing_bulls = Team("Racing Bulls", strength=82, pit_speed=2)
+alpine = Team("Alpine", strength=81, pit_speed=2)
+haas = Team("Haas", strength=77, pit_speed=2)
+audi = Team("Audi", strength=75, pit_speed=2)
+williams = Team("Williams", strength=74, pit_speed=2)
+aston_martin = Team("Aston Martin", strength=73, pit_speed=2)
+cadillac = Team("Cadillac", strength=70, pit_speed=1)
 
-# Ferrari
-leclerc = AggressiveDriver("Leclerc", speed=94, skill=93, position=0, in_race=True)
-hamilton = BalancedDriver("Hamilton", speed=91, skill=96, position=0, in_race=True)
 
-# McLaren
-norris = BalancedDriver("Norris", speed=95, skill=93, position=0, in_race=True)
-piastri = BalancedDriver("Piastri", speed=94, skill=91, position=0, in_race=True)
+def assign_to_team(driver, team):
+    driver.team = team
+    return driver
 
-# Mercedes
-russell = BalancedDriver("Russell", speed=92, skill=90, position=0, in_race=True)
-antonelli = AggressiveDriver("Antonelli", speed=88, skill=85, position=0, in_race=True)
-
-# Aston Martin
-alonso = ConservativeDriver("Alonso", speed=89, skill=95, position=0, in_race=True)
-stroll = ConservativeDriver("Stroll", speed=82, skill=80, position=0, in_race=True)
-
-# Alpine
-gasly = BalancedDriver("Gasly", speed=86, skill=86, position=0, in_race=True)
-colapinto = AggressiveDriver("Colapinto", speed=84, skill=82, position=0, in_race=True)
-
-# Haas
-ocon = BalancedDriver("Ocon", speed=85, skill=85, position=0, in_race=True)
-bearman = AggressiveDriver("Bearman", speed=86, skill=83, position=0, in_race=True)
-
-# Racing Bulls
-hadjar = AggressiveDriver("Hadjar", speed=87, skill=84, position=0, in_race=True)
-lawson = AggressiveDriver("Lawson", speed=86, skill=84, position=0, in_race=True)
-
-# Williams
-albon = BalancedDriver("Albon", speed=89, skill=88, position=0, in_race=True)
-sainz = AggressiveDriver("Sainz", speed=91, skill=90, position=0, in_race=True)
-
-# Sauber
-hulkenberg = ConservativeDriver("Hulkenberg", speed=84, skill=88, position=0, in_race=True)
-bortoleto = AggressiveDriver("Bortoleto", speed=84, skill=81, position=0, in_race=True)
 
 drivers = [
-    verstappen, tsunoda,
-    leclerc, hamilton,
-    norris, piastri,
-    russell, antonelli,
-    alonso, stroll,
-    gasly, colapinto,
-    ocon, bearman,
-    hadjar, lawson,
-    albon, sainz,
-    hulkenberg, bortoleto
+    # Mercedes
+    assign_to_team(BalancedDriver("Russell", 95, 96, 0, True), mercedes),
+    assign_to_team(AggressiveDriver("Antonelli", 97, 94, 0, True), mercedes),
+
+    # Ferrari
+    assign_to_team(AggressiveDriver("Leclerc", 96, 96, 0, True), ferrari),
+    assign_to_team(BalancedDriver("Hamilton", 94, 98, 0, True), ferrari),
+
+    # McLaren
+    assign_to_team(BalancedDriver("Norris", 96, 95, 0, True), mclaren),
+    assign_to_team(BalancedDriver("Piastri", 94, 94, 0, True), mclaren),
+
+    # Red Bull Racing
+    assign_to_team(AggressiveDriver("Verstappen", 98, 99, 0, True), red_bull),
+    assign_to_team(AggressiveDriver("Hadjar", 91, 88, 0, True), red_bull),
+
+    # Racing Bulls
+    assign_to_team(AggressiveDriver("Lawson", 87, 86, 0, True), racing_bulls),
+    assign_to_team(AggressiveDriver("Lindblad", 85, 82, 0, True), racing_bulls),
+
+    # Alpine
+    assign_to_team(BalancedDriver("Gasly", 89, 91, 0, True), alpine),
+    assign_to_team(AggressiveDriver("Colapinto", 86, 84, 0, True), alpine),
+
+    # Haas
+    assign_to_team(BalancedDriver("Ocon", 86, 89, 0, True), haas),
+    assign_to_team(AggressiveDriver("Bearman", 87, 86, 0, True), haas),
+
+    # Audi
+    assign_to_team(ConservativeDriver("Hulkenberg", 86, 92, 0, True), audi),
+    assign_to_team(BalancedDriver("Bortoleto", 86, 85, 0, True), audi),
+
+    # Williams
+    assign_to_team(BalancedDriver("Sainz", 91, 94, 0, True), williams),
+    assign_to_team(BalancedDriver("Albon", 89, 91, 0, True), williams),
+
+    # Aston Martin
+    assign_to_team(ConservativeDriver("Alonso", 90, 99, 0, True), aston_martin),
+    assign_to_team(ConservativeDriver("Stroll", 83, 84, 0, True), aston_martin),
+
+    # Cadillac
+    assign_to_team(ConservativeDriver("Perez", 85, 92, 0, True), cadillac),
+    assign_to_team(ConservativeDriver("Bottas", 87, 94, 0, True), cadillac),
 ]
+
 
 def main():
     race = Race(drivers, total_laps=30)
