@@ -1,4 +1,4 @@
-from f1.Team import Team
+from f1.team import Team
 from f1.driver import AggressiveDriver
 from f1.driver import ConservativeDriver
 from f1.driver import BalancedDriver
@@ -63,7 +63,10 @@ drivers = [
     hulkenberg, bortoleto
 ]
 
-race = Race(drivers, total_laps=30)
+def main():
+    race = Race(drivers, total_laps=30)
+    race.run()
 
 
-race.run()
+if __name__ == "__main__":
+    main()

@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 import random
-import Team
 
 class Driver (ABC):
 
