@@ -105,6 +105,7 @@ class AggressiveDriver(Driver):
         # DNF
         if self.fuel <= 0 or self.tyre_fresh <= 0:
             self.in_race = False
+            self.dnf = True
             self.performance -= 1000
 
 class ConservativeDriver(Driver):
@@ -135,6 +136,7 @@ class ConservativeDriver(Driver):
 
         if self.fuel <= 0 or self.tyre_fresh <= 0:
             self.in_race = False
+            self.dnf = True
             self.performance -= 1000
 
 class BalancedDriver(Driver):
@@ -165,4 +167,5 @@ class BalancedDriver(Driver):
 
         if self.fuel <= 0 or self.tyre_fresh <= 0:
             self.in_race = False
+            self.dnf = True
             self.performance -= 1000
