@@ -69,6 +69,10 @@ class Driver (ABC):
         self.in_race = False
         self.dnf = True
 
+    def calculate_base_performance(self):
+        team_strength = self.team.strength if self.team else 80
+        return self.speed * 0.4 + self.skill * 0.4 + team_strength * 0.2
+
 
 
 class AggressiveDriver(Driver):
@@ -93,8 +97,7 @@ class AggressiveDriver(Driver):
         tyre_loss = 100 - self.tyre_fresh
 
         self.performance = (
-            self.speed * 0.5 +
-            self.skill * 0.5 -
+            self.calculate_base_performance() -
             fuel_loss * 0.2 -
             tyre_loss * 0.4 +
             random.uniform(-1, 1)
@@ -128,8 +131,7 @@ class ConservativeDriver(Driver):
         tyre_loss = 100 - self.tyre_fresh
 
         self.performance = (
-                self.speed * 0.5 +
-                self.skill * 0.5 -
+                self.calculate_base_performance() -
                 fuel_loss * 0.2 -
                 tyre_loss * 0.4 +
                 random.uniform(-1, 1)
@@ -162,8 +164,7 @@ class BalancedDriver(Driver):
         tyre_loss = 100 - self.tyre_fresh
 
         self.performance = (
-                self.speed * 0.5 +
-                self.skill * 0.5 -
+                self.calculate_base_performance() -
                  fuel_loss * 0.2 -
                 tyre_loss * 0.4 +
                 random.uniform(-1, 1)
