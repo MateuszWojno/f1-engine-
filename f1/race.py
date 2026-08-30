@@ -18,6 +18,9 @@ class Race:
 
         for driver in self.drivers:
             if driver.in_race:
+                if driver.suffers_technical_failure(self.circuit):
+                    continue
+
                 driver.act(self.circuit)
                 driver.total_time += driver.lap_time
 

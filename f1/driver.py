@@ -71,6 +71,18 @@ class Driver (ABC):
         self.in_race = False
         self.dnf = True
 
+    def suffers_technical_failure(self, circuit):
+        if not self.team:
+            return False
+
+        failure_risk = (1 - self.team.reliability) / circuit.total_laps
+        if random.random() < failure_risk:
+            self.in_race = False
+            self.dnf = True
+            return True
+
+        return False
+
     def calculate_base_performance(self):
         team_strength = self.team.strength if self.team else 80
         return self.speed * 0.4 + self.skill * 0.4 + team_strength * 0.2
