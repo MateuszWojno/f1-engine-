@@ -84,7 +84,7 @@ class AggressiveDriver(Driver):
             return
 
         self.fuel -= circuit.fuel_consumption * random.uniform(1.05, 1.15)
-        self.tyre_fresh -= random.randint(3, 7)
+        self.tyre_fresh -= circuit.tyre_wear * random.randint(3, 7)
 
         # zabezpieczenia
         self.fuel = max(self.fuel, 0)
@@ -120,7 +120,7 @@ class ConservativeDriver(Driver):
             return
 
         self.fuel -= circuit.fuel_consumption * random.uniform(0.90, 0.98)
-        self.tyre_fresh -= random.randint(2, 5)
+        self.tyre_fresh -= circuit.tyre_wear * random.randint(2, 5)
 
         self.fuel = max(self.fuel, 0)
         self.tyre_fresh = max(self.tyre_fresh, 0)
@@ -153,7 +153,7 @@ class BalancedDriver(Driver):
             return
 
         self.fuel -= circuit.fuel_consumption * random.uniform(0.98, 1.05)
-        self.tyre_fresh -= random.randint(2, 6)
+        self.tyre_fresh -= circuit.tyre_wear * random.randint(2, 6)
 
         self.fuel = max(self.fuel, 0)
         self.tyre_fresh = max(self.tyre_fresh, 0)
