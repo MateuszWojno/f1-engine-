@@ -30,7 +30,7 @@ class Driver (ABC):
         attack = self.speed + self.skill + random.randint(1,10)
         attack -= (circuit.overtaking_difficulty - 0.5) * 12
 
-        if random.random() < 0.01:
+        if random.random() < circuit.collision_risk:
 
             collision_type = random.random()
 

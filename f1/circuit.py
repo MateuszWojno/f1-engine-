@@ -9,3 +9,4 @@ class Circuit:
     fuel_consumption: float
     tyre_wear: float
     overtaking_difficulty: float
+    collision_risk: float
