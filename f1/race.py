@@ -1,6 +1,9 @@
 from f1.logger import RaceLogger
 
 
+F1_POINTS = (25, 18, 15, 12, 10, 8, 6, 4, 2, 1)
+
+
 class Race:
     def __init__(self, drivers, circuit, logger=None):
         self.drivers = drivers
@@ -8,6 +11,7 @@ class Race:
         self.total_laps = circuit.total_laps
         self.current_lap = 0
         self.finished = False
+        self.results = []
         self.logger = logger or RaceLogger()
 
     def step(self):
@@ -66,7 +70,16 @@ class Race:
         if self.current_lap >= self.total_laps:
             self.finished = True
 
+            self.results = list(ranking)
+            self.award_points()
+
         self.logger.save_lap(self.current_lap, self.drivers)
+
+    def award_points(self):
+        for driver, points in zip(self.results, F1_POINTS):
+            driver.points += points
+            if driver.team:
+                driver.team.points += points
 
     def run(self):
 
