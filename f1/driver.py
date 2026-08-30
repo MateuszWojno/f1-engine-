@@ -7,6 +7,11 @@ class Driver (ABC):
         self.name = name
         self.speed = speed
         self.skill = skill
+        self.points = 0
+        self.team = None
+        self.reset_race_state(position, in_race)
+
+    def reset_race_state(self, position=0, in_race=True):
         self.tyre_fresh = 100
         self.fuel = 100
         self.position = position
@@ -18,7 +23,6 @@ class Driver (ABC):
         self.pit_stops = 0
         self.in_pit = False
         self.dnf = False
-        self.team = None
 
     @abstractmethod
     def act(self, circuit):
