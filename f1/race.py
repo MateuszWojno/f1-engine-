@@ -35,7 +35,7 @@ class Race:
             attacker = ranking[i]
             defender = ranking[i - 1]
 
-            if attacker.interact(defender):
+            if attacker.interact(defender, self.circuit):
                 attacker.total_time = defender.total_time - 0.001
                 ranking[i], ranking[i - 1] = ranking[i - 1], ranking[i]
                 i -= 1

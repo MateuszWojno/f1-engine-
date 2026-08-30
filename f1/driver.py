@@ -24,10 +24,11 @@ class Driver (ABC):
     def act(self, circuit):
         pass
 
-    def interact(self, other):
+    def interact(self, other, circuit):
 
         defense = other.speed + other.skill + random.randint(1,10)
         attack = self.speed + self.skill + random.randint(1,10)
+        attack -= (circuit.overtaking_difficulty - 0.5) * 12
 
         if random.random() < 0.01:
 
