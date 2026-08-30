@@ -6,3 +6,4 @@ class Circuit:
     name: str
     total_laps: int
     base_lap_time: float
+    fuel_consumption: float
