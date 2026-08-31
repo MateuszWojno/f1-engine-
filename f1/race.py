@@ -39,7 +39,7 @@ class Race:
         if not active:
             self.finished = True
             self.record_results([])
-            self.logger.save_lap(self.current_lap, self.drivers)
+            self.logger.save_lap(self.circuit, self.current_lap, self.drivers)
             return
 
         ranking = sorted(active, key=lambda d: d.total_time)
@@ -64,7 +64,7 @@ class Race:
         if not ranking:
             self.finished = True
             self.record_results([])
-            self.logger.save_lap(self.current_lap, self.drivers)
+            self.logger.save_lap(self.circuit, self.current_lap, self.drivers)
             return
 
         leader_time = ranking[0].total_time
@@ -81,7 +81,7 @@ class Race:
             self.record_results(ranking)
             self.award_points()
 
-        self.logger.save_lap(self.current_lap, self.drivers)
+        self.logger.save_lap(self.circuit, self.current_lap, self.drivers)
 
     def record_results(self, finishers):
         self.finishers = list(finishers)

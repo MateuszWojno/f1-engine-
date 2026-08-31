@@ -1,4 +1,4 @@
 __pycache__/
 .idea/
 .venv/
-race_log.csv
+race_log*.csv
