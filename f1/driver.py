@@ -15,6 +15,7 @@ class Driver (ABC):
         self.tyre_fresh = 100
         self.fuel = 100
         self.position = position
+        self.grid_position = position
         self.in_race = in_race
         self.performance = 0
         self.lap_time = 0

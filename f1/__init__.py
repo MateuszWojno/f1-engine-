@@ -2,6 +2,7 @@
 
 from f1.circuit import Circuit
 from f1.driver import AggressiveDriver, BalancedDriver, ConservativeDriver, Driver
+from f1.qualifying import Qualifying
 from f1.race import Race
 from f1.season import Season
 from f1.team import Team
@@ -12,6 +13,7 @@ __all__ = [
     "Circuit",
     "ConservativeDriver",
     "Driver",
+    "Qualifying",
     "Race",
     "Season",
     "Team",

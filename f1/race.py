@@ -1,4 +1,5 @@
 from f1.logger import RaceLogger
+from f1.qualifying import Qualifying
 
 
 F1_POINTS = (25, 18, 15, 12, 10, 8, 6, 4, 2, 1)
@@ -13,6 +14,8 @@ class Race:
         self.finished = False
         self.results = []
         self.logger = logger or RaceLogger()
+        self.qualifying = Qualifying(self.drivers, self.circuit)
+        self.starting_grid = self.qualifying.run()
 
     def step(self):
         if self.finished:
