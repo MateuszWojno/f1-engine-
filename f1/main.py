@@ -80,6 +80,7 @@ def main():
     season.run()
 
     print("\n=== RACE SUMMARIES ===")
+    sprint_results = iter(season.sprints)
     for race in season.races:
         pole_sitter = race.starting_grid[0].name
         podium = ", ".join(driver.name for driver in race.finishers[:3])
@@ -92,6 +93,15 @@ def main():
             f"{race.circuit.name} | Pole: {pole_sitter} | "
             f"Podium: {podium} | DNF: {dnf_count}"
         )
+
+        if race.circuit.has_sprint:
+            sprint = next(sprint_results)
+            sprint_winner = (
+                sprint.finishers[0].name
+                if sprint.finishers
+                else "No classified finishers"
+            )
+            print(f"  Sprint winner: {sprint_winner}")
 
     print("\n=== DRIVERS' CHAMPIONSHIP ===")
     for position, driver in enumerate(season.driver_standings(), start=1):
