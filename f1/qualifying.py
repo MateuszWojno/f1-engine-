@@ -9,7 +9,11 @@ class Qualifying:
 
     def run(self):
         scored_drivers = [
-            (driver.calculate_base_performance() + random.uniform(-2, 2), driver)
+            (
+                driver.calculate_base_performance(self.circuit)
+                + random.uniform(-2, 2),
+                driver,
+            )
             for driver in self.drivers
         ]
         scored_drivers.sort(key=lambda entry: entry[0], reverse=True)
