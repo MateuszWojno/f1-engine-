@@ -6,17 +6,17 @@ from f1.season import Season
 from f1.team import Team
 
 
-mercedes = Team("Mercedes", strength=97, pit_speed=3)
-ferrari = Team("Ferrari", strength=94, pit_speed=3)
-mclaren = Team("McLaren", strength=92, pit_speed=3)
-red_bull = Team("Red Bull Racing", strength=89, pit_speed=3)
-racing_bulls = Team("Racing Bulls", strength=82, pit_speed=2)
-alpine = Team("Alpine", strength=81, pit_speed=2)
-haas = Team("Haas", strength=77, pit_speed=2)
-audi = Team("Audi", strength=75, pit_speed=2)
-williams = Team("Williams", strength=74, pit_speed=2)
-aston_martin = Team("Aston Martin", strength=73, pit_speed=2)
-cadillac = Team("Cadillac", strength=70, pit_speed=1)
+mercedes = Team("Mercedes", strength=97, pit_speed=3, power=98, aerodynamics=96)
+ferrari = Team("Ferrari", strength=94, pit_speed=3, power=95, aerodynamics=94)
+mclaren = Team("McLaren", strength=92, pit_speed=3, power=91, aerodynamics=96)
+red_bull = Team("Red Bull Racing", strength=89, pit_speed=3, power=92, aerodynamics=90)
+racing_bulls = Team("Racing Bulls", strength=82, pit_speed=2, power=86, aerodynamics=82)
+alpine = Team("Alpine", strength=81, pit_speed=2, power=82, aerodynamics=82)
+haas = Team("Haas", strength=77, pit_speed=2, power=82, aerodynamics=76)
+audi = Team("Audi", strength=75, pit_speed=2, power=78, aerodynamics=76)
+williams = Team("Williams", strength=74, pit_speed=2, power=84, aerodynamics=73)
+aston_martin = Team("Aston Martin", strength=73, pit_speed=2, power=76, aerodynamics=78)
+cadillac = Team("Cadillac", strength=70, pit_speed=1, power=75, aerodynamics=70)
 
 
 def assign_to_team(driver, team):

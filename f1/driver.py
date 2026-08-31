@@ -93,8 +93,15 @@ class Driver (ABC):
 
         return False
 
-    def calculate_base_performance(self):
-        team_strength = self.team.strength if self.team else 80
+    def calculate_base_performance(self, circuit):
+        if self.team:
+            team_strength = (
+                self.team.power * circuit.power_demand
+                + self.team.aerodynamics * (1 - circuit.power_demand)
+            )
+        else:
+            team_strength = 80
+
         return self.speed * 0.4 + self.skill * 0.4 + team_strength * 0.2
 
 
@@ -121,7 +128,7 @@ class AggressiveDriver(Driver):
         tyre_loss = 100 - self.tyre_fresh
 
         self.performance = (
-            self.calculate_base_performance() -
+            self.calculate_base_performance(circuit) -
             fuel_penalty -
             tyre_loss * 0.4 +
             random.uniform(-1, 1)
@@ -155,7 +162,7 @@ class ConservativeDriver(Driver):
         tyre_loss = 100 - self.tyre_fresh
 
         self.performance = (
-                self.calculate_base_performance() -
+                self.calculate_base_performance(circuit) -
                 fuel_penalty -
                 tyre_loss * 0.4 +
                 random.uniform(-1, 1)
@@ -188,7 +195,7 @@ class BalancedDriver(Driver):
         tyre_loss = 100 - self.tyre_fresh
 
         self.performance = (
-                self.calculate_base_performance() -
+                self.calculate_base_performance(circuit) -
                  fuel_penalty -
                 tyre_loss * 0.4 +
                 random.uniform(-1, 1)

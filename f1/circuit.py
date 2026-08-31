@@ -11,3 +11,4 @@ class Circuit:
     overtaking_difficulty: float
     collision_risk: float
     has_sprint: bool = False
+    power_demand: float = 0.5
