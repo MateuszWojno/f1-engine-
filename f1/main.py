@@ -76,7 +76,7 @@ def create_drivers():
 
 
 def main():
-    season = Season(create_drivers(), F1_2026_CALENDAR, seed=2026)
+    season = Season(create_drivers(), F1_2026_CALENDAR)
     season.run()
 
     print("\n=== RACE SUMMARIES ===")
