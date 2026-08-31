@@ -79,10 +79,19 @@ def main():
     season = Season(create_drivers(), F1_2026_CALENDAR, seed=2026)
     season.run()
 
-    print("\n=== RACE WINNERS ===")
+    print("\n=== RACE SUMMARIES ===")
     for race in season.races:
-        if race.results:
-            print(f"{race.circuit.name}: {race.results[0].name}")
+        pole_sitter = race.starting_grid[0].name
+        podium = ", ".join(driver.name for driver in race.finishers[:3])
+        dnf_count = sum(driver.dnf for driver in race.results)
+
+        if not podium:
+            podium = "No classified finishers"
+
+        print(
+            f"{race.circuit.name} | Pole: {pole_sitter} | "
+            f"Podium: {podium} | DNF: {dnf_count}"
+        )
 
     print("\n=== DRIVERS' CHAMPIONSHIP ===")
     for position, driver in enumerate(season.driver_standings(), start=1):
