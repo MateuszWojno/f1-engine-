@@ -2,7 +2,7 @@ from copy import deepcopy
 
 from f1.calendar_2026 import F1_2026_CALENDAR
 from f1.driver import AggressiveDriver, BalancedDriver, ConservativeDriver
-from f1.race import Race
+from f1.season import Season
 from f1.team import Team
 
 
@@ -76,9 +76,21 @@ def create_drivers():
 
 
 def main():
-    circuit = F1_2026_CALENDAR[10]
-    race = Race(create_drivers(), circuit)
-    race.run()
+    season = Season(create_drivers(), F1_2026_CALENDAR)
+    season.run()
+
+    print("\n=== RACE WINNERS ===")
+    for race in season.races:
+        if race.results:
+            print(f"{race.circuit.name}: {race.results[0].name}")
+
+    print("\n=== DRIVERS' CHAMPIONSHIP ===")
+    for position, driver in enumerate(season.driver_standings(), start=1):
+        print(f"P{position} - {driver.name}: {driver.points} pts")
+
+    print("\n=== CONSTRUCTORS' CHAMPIONSHIP ===")
+    for position, team in enumerate(season.team_standings(), start=1):
+        print(f"P{position} - {team.name}: {team.points} pts")
 
 
 if __name__ == "__main__":
