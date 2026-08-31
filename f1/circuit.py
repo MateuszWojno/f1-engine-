@@ -10,3 +10,4 @@ class Circuit:
     tyre_wear: float
     overtaking_difficulty: float
     collision_risk: float
+    has_sprint: bool = False

@@ -6,7 +6,7 @@ F1_POINTS = (25, 18, 15, 12, 10, 8, 6, 4, 2, 1)
 
 
 class Race:
-    def __init__(self, drivers, circuit, logger=None):
+    def __init__(self, drivers, circuit, logger=None, points=F1_POINTS):
         self.drivers = drivers
         self.circuit = circuit
         self.total_laps = circuit.total_laps
@@ -14,6 +14,7 @@ class Race:
         self.finished = False
         self.finishers = []
         self.results = []
+        self.points_system = points
         self.logger = logger or RaceLogger()
         self.qualifying = Qualifying(self.drivers, self.circuit)
         self.starting_grid = self.qualifying.run()
@@ -97,7 +98,7 @@ class Race:
         self.results = self.finishers + retired
 
     def award_points(self):
-        for driver, points in zip(self.finishers, F1_POINTS):
+        for driver, points in zip(self.finishers, self.points_system):
             driver.points += points
             if driver.team:
                 driver.team.points += points
