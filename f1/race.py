@@ -12,6 +12,7 @@ class Race:
         self.total_laps = circuit.total_laps
         self.current_lap = 0
         self.finished = False
+        self.finishers = []
         self.results = []
         self.logger = logger or RaceLogger()
         self.qualifying = Qualifying(self.drivers, self.circuit)
@@ -29,12 +30,15 @@ class Race:
                     continue
 
                 driver.act(self.circuit)
-                driver.total_time += driver.lap_time
+                if driver.in_race:
+                    driver.total_time += driver.lap_time
+                    driver.completed_laps = self.current_lap
 
         active = [d for d in self.drivers if d.in_race]
 
         if not active:
             self.finished = True
+            self.record_results([])
             self.logger.save_lap(self.current_lap, self.drivers)
             return
 
@@ -59,6 +63,7 @@ class Race:
 
         if not ranking:
             self.finished = True
+            self.record_results([])
             self.logger.save_lap(self.current_lap, self.drivers)
             return
 
@@ -73,13 +78,26 @@ class Race:
         if self.current_lap >= self.total_laps:
             self.finished = True
 
-            self.results = list(ranking)
+            self.record_results(ranking)
             self.award_points()
 
         self.logger.save_lap(self.current_lap, self.drivers)
 
+    def record_results(self, finishers):
+        self.finishers = list(finishers)
+        retired = sorted(
+            (driver for driver in self.drivers if driver.dnf),
+            key=lambda driver: (driver.completed_laps, -driver.total_time),
+            reverse=True,
+        )
+
+        for position, driver in enumerate(retired, start=len(self.finishers) + 1):
+            driver.position = position
+
+        self.results = self.finishers + retired
+
     def award_points(self):
-        for driver, points in zip(self.results, F1_POINTS):
+        for driver, points in zip(self.finishers, F1_POINTS):
             driver.points += points
             if driver.team:
                 driver.team.points += points

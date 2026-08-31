@@ -20,6 +20,7 @@ class Driver (ABC):
         self.performance = 0
         self.lap_time = 0
         self.total_time = 0
+        self.completed_laps = 0
         self.gap = 0
         self.pit_stops = 0
         self.in_pit = False
