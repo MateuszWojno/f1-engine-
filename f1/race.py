@@ -113,6 +113,6 @@ class Race:
             print("\n=== DNF ===")
             for d in self.drivers:
                 if not d.in_race:
-                    print(f"DNF - {d.name}")
+                    print(f"DNF - {d.name} | {d.dnf_reason}")
 
 

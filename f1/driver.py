@@ -24,6 +24,7 @@ class Driver (ABC):
         self.pit_stops = 0
         self.in_pit = False
         self.dnf = False
+        self.dnf_reason = None
 
     @abstractmethod
     def act(self, circuit):
@@ -72,9 +73,13 @@ class Driver (ABC):
         # nowe opony
         self.tyre_fresh = 100
 
-    def crash(self):
+    def retire(self, reason):
         self.in_race = False
         self.dnf = True
+        self.dnf_reason = reason
+
+    def crash(self):
+        self.retire("Collision")
 
     def suffers_technical_failure(self, circuit):
         if not self.team:
@@ -82,8 +87,7 @@ class Driver (ABC):
 
         failure_risk = (1 - self.team.reliability) / circuit.total_laps
         if random.random() < failure_risk:
-            self.in_race = False
-            self.dnf = True
+            self.retire("Technical failure")
             return True
 
         return False
@@ -126,8 +130,8 @@ class AggressiveDriver(Driver):
 
         # DNF
         if self.fuel <= 0 or self.tyre_fresh <= 0:
-            self.in_race = False
-            self.dnf = True
+            reason = "Out of fuel" if self.fuel <= 0 else "Tyre failure"
+            self.retire(reason)
             self.performance -= 1000
 
 class ConservativeDriver(Driver):
@@ -159,8 +163,8 @@ class ConservativeDriver(Driver):
         self.lap_time = circuit.base_lap_time - self.performance * 0.03
 
         if self.fuel <= 0 or self.tyre_fresh <= 0:
-            self.in_race = False
-            self.dnf = True
+            reason = "Out of fuel" if self.fuel <= 0 else "Tyre failure"
+            self.retire(reason)
             self.performance -= 1000
 
 class BalancedDriver(Driver):
@@ -192,6 +196,6 @@ class BalancedDriver(Driver):
         self.lap_time = circuit.base_lap_time - self.performance * 0.03
 
         if self.fuel <= 0 or self.tyre_fresh <= 0:
-            self.in_race = False
-            self.dnf = True
+            reason = "Out of fuel" if self.fuel <= 0 else "Tyre failure"
+            self.retire(reason)
             self.performance -= 1000
