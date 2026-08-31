@@ -1,13 +1,19 @@
+import random
+
 from f1.race import Race
 
 
 class Season:
-    def __init__(self, drivers, calendar):
+    def __init__(self, drivers, calendar, seed=None):
         self.drivers = drivers
         self.calendar = tuple(calendar)
+        self.seed = seed
         self.races = []
 
     def run(self):
+        if self.seed is not None:
+            random.seed(self.seed)
+
         for circuit in self.calendar:
             for driver in self.drivers:
                 driver.reset_race_state()
