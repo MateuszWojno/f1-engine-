@@ -85,13 +85,18 @@ def main():
         pole_sitter = race.starting_grid[0].name
         podium = ", ".join(driver.name for driver in race.finishers[:3])
         dnf_count = sum(driver.dnf for driver in race.results)
+        fastest_lap = (
+            f"{race.fastest_lap_driver.name} ({race.fastest_lap_time:.2f}s)"
+            if race.fastest_lap_driver
+            else "None"
+        )
 
         if not podium:
             podium = "No classified finishers"
 
         print(
             f"{race.circuit.name} | Pole: {pole_sitter} | "
-            f"Podium: {podium} | DNF: {dnf_count}"
+            f"Podium: {podium} | Fastest: {fastest_lap} | DNF: {dnf_count}"
         )
 
         if race.circuit.has_sprint:

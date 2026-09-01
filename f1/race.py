@@ -14,6 +14,8 @@ class Race:
         self.finished = False
         self.finishers = []
         self.results = []
+        self.fastest_lap_driver = None
+        self.fastest_lap_time = None
         self.points_system = points
         self.logger = logger or RaceLogger()
         self.qualifying = Qualifying(self.drivers, self.circuit)
@@ -34,6 +36,12 @@ class Race:
                 if driver.in_race:
                     driver.total_time += driver.lap_time
                     driver.completed_laps = self.current_lap
+                    if (
+                        self.fastest_lap_time is None
+                        or driver.lap_time < self.fastest_lap_time
+                    ):
+                        self.fastest_lap_driver = driver
+                        self.fastest_lap_time = driver.lap_time
 
         active = [d for d in self.drivers if d.in_race]
 
