@@ -110,14 +110,8 @@ def main():
 
     print("\n=== DRIVERS' CHAMPIONSHIP ===")
     for position, driver in enumerate(season.driver_standings(), start=1):
-        wins = sum(
-            bool(race.finishers) and race.finishers[0] is driver
-            for race in season.races
-        )
-        podiums = sum(
-            driver in race.finishers[:3]
-            for race in season.races
-        )
+        wins = season.driver_wins(driver)
+        podiums = season.driver_podiums(driver)
         print(
             f"P{position} - {driver.name}: {driver.points} pts | "
             f"Wins: {wins} | Podiums: {podiums}"

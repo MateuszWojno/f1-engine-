@@ -44,7 +44,24 @@ class Season:
         return race
 
     def driver_standings(self):
-        return sorted(self.drivers, key=lambda driver: driver.points, reverse=True)
+        return sorted(
+            self.drivers,
+            key=lambda driver: (
+                driver.points,
+                self.driver_wins(driver),
+                self.driver_podiums(driver),
+            ),
+            reverse=True,
+        )
+
+    def driver_wins(self, driver):
+        return sum(
+            bool(race.finishers) and race.finishers[0] is driver
+            for race in self.races
+        )
+
+    def driver_podiums(self, driver):
+        return sum(driver in race.finishers[:3] for race in self.races)
 
     def team_standings(self):
         teams = {
